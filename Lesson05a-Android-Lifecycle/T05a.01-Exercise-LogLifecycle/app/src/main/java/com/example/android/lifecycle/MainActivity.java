@@ -104,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Logs to the console and appends the lifecycle method name to the TextView so that you can
+     * Logs to the console and app
+     * ends the lifecycle method name to the TextView so that you can
      * view the series of method callbacks that are called both from the app and from within
      * Android Studio's Logcat.
      *
