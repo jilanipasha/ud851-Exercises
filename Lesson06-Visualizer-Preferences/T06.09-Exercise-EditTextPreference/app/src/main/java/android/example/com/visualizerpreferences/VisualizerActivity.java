@@ -18,6 +18,7 @@ package android.example.com.visualizerpreferences;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.example.com.visualizerpreferences.AudioVisuals.AudioInputReader;
@@ -62,7 +63,13 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
         mVisualizerView.setMinSizeScale(1);
         loadColorFromPreferences(sharedPreferences);
         // Register the listener
+        loadSizeFromPreference(sharedPreferences);
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+
+    private void loadSizeFromPreference(SharedPreferences sharedPreferences) {
+       float minSize = Float.parseFloat(sharedPreferences.getString(getString(R.string.pref_size_key),getString(R.string.pref_size_default)));
+       mVisualizerView.setMinSizeScale(minSize);
     }
 
     private void loadColorFromPreferences(SharedPreferences sharedPreferences) {
@@ -82,6 +89,8 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
             mVisualizerView.setShowTreble(sharedPreferences.getBoolean(key, getResources().getBoolean(R.bool.pref_show_treble_default)));
         } else if (key.equals(getString(R.string.pref_color_key))) {
             loadColorFromPreferences(sharedPreferences);
+        }else if (key.equals(getString(R.string.pref_size_key))){
+            loadSizeFromPreference(sharedPreferences);
         }
     }
 
